@@ -2,6 +2,9 @@
 layout: default
 ---
 
+{% assign art_images = "basquiat-crown.svg|basquiat-face.svg|basquiat-skull.svg" | split: "|" %}
+{% assign img_idx = page.date | date: "%j" | modulo: 3 %}
+
 <article class="post-article">
   <header class="post-header">
     <span class="section-tag">{{ page.categories | first | default: "artigo" }}</span>
@@ -13,7 +16,7 @@ layout: default
   </header>
 
   <div class="post-image-hero">
-    <div class="hero-placeholder"></div>
+    <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="hero-img">
   </div>
 
   <div class="post-body">
@@ -21,6 +24,6 @@ layout: default
   </div>
 
   <footer class="post-footer">
-    <p class="post-footer-text"><a href="/artigos/">&#8592; Todos os artigos</a></p>
+    <p class="post-footer-text"><a href="{{ '/artigos/' | relative_url }}">&#8592; Todos os artigos</a></p>
   </footer>
 </article>

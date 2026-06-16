@@ -164,11 +164,11 @@ main {
   overflow: hidden;
 }
 
-.featured-placeholder {
+.featured-img {
   width: 100%;
   height: 100%;
   min-height: 360px;
-  background: linear-gradient(135deg, #e5ddd5 0%, #d4c4b5 100%);
+  object-fit: cover;
 }
 
 .featured-content {
@@ -238,10 +238,15 @@ main {
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-.card-placeholder {
+.card-img {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, #ede5db 0%, #ddd0c0 100%);
+  object-fit: cover;
+}
+.card-img-small {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
 }
 
 .card-content {
@@ -334,10 +339,10 @@ main {
   margin-bottom: 40px;
 }
 
-.hero-placeholder {
+.hero-img {
   width: 100%;
   height: 400px;
-  background: linear-gradient(135deg, #e5ddd5 0%, #d4c4b5 100%);
+  object-fit: cover;
 }
 
 .post-body {

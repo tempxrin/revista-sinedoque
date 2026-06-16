@@ -3,12 +3,15 @@ layout: default
 title: Início
 ---
 
+{% assign art_images = "basquiat-crown.svg|basquiat-face.svg|basquiat-skull.svg" | split: "|" %}
+
 <section class="featured-post">
   {% assign latest = site.posts | first %}
   {% if latest %}
+    {% assign img_idx = 0 %}
     <div class="featured-card">
       <div class="featured-image">
-        <div class="featured-placeholder"></div>
+        <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="featured-img">
       </div>
       <div class="featured-content">
         <span class="section-tag">{{ latest.categories | first | default: "destaque" }}</span>
@@ -22,9 +25,10 @@ title: Início
 
 <section class="home-grid">
   {% for post in site.posts offset:1 limit:6 %}
+    {% assign img_idx = forloop.index0 | modulo: 3 %}
     <article class="post-card">
       <div class="card-image">
-        <div class="card-placeholder"></div>
+        <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="card-img">
       </div>
       <div class="card-content">
         <span class="section-tag">{{ post.categories | first | default: "artigo" }}</span>
@@ -39,9 +43,10 @@ title: Início
 {% if posts_count > 7 %}
   <section class="secondary-grid">
     {% for post in site.posts offset:7 %}
+      {% assign img_idx = forloop.index0 | modulo: 3 %}
       <article class="post-card-small">
         <div class="card-image">
-          <div class="card-placeholder"></div>
+          <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="card-img-small">
         </div>
         <div class="card-content">
           <span class="section-tag">{{ post.categories | first | default: "artigo" }}</span>
