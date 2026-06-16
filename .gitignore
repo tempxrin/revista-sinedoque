@@ -4,3 +4,5 @@ _site/
 Gemfile.lock
 vendor/
 .bundle/
+.wrangler/
+node_modules/
