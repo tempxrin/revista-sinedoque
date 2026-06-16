@@ -566,6 +566,13 @@ main {
   display: flex;
   gap: 12px;
 }
+.stories-help {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  max-width: 400px;
+}
 .stories-btn {
   padding: 12px 32px;
   border: none;
@@ -584,9 +591,14 @@ main {
 }
 .stories-btn-primary {
   background: #e4405f;
+  text-decoration: none;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
 }
 .stories-btn-primary:hover {
   background: #c92e4b;
+  color: #fff;
 }
 .stories-btn-outline {
   background: transparent;

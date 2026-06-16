@@ -59,10 +59,11 @@ layout: default
   <div class="stories-modal" id="storiesModal">
     <canvas id="storiesCanvas" width="1080" height="1920"></canvas>
     <div class="stories-actions">
-      <button class="stories-btn" onclick="downloadStories()">Baixar imagem</button>
-      <button class="stories-btn stories-btn-primary" onclick="openInstagram()">Abrir no Instagram</button>
+      <button class="stories-btn" id="downloadStoriesBtn" onclick="downloadStories()">Baixar imagem</button>
+      <a class="stories-btn stories-btn-primary" href="https://instagram.com" target="_blank" rel="noopener">Abrir Instagram</a>
       <button class="stories-btn stories-btn-outline" onclick="closeStories(event)">Fechar</button>
     </div>
+    <p class="stories-help">Baixe a imagem, depois abra o Instagram e poste nos Stories manualmente.</p>
   </div>
 </div>
 
@@ -240,22 +241,5 @@ function downloadStories() {
   link.click();
 }
 
-function openInstagram() {
-  var canvas = document.getElementById('storiesCanvas');
-  var link = document.createElement('a');
-  link.download = 'tempovani-stories.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
 
-  setTimeout(function() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1) {
-      window.location.href = 'instagram://library?AssetPath=';
-    } else if (ua.indexOf('android') > -1) {
-      window.location.href = 'intent://instagram.com#Intent;package=com.instagram.android;end';
-    } else {
-      window.open('https://instagram.com', '_blank');
-    }
-  }, 1000);
-}
 </script>
