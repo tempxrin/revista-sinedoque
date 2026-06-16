@@ -59,11 +59,11 @@ layout: default
   <div class="stories-modal" id="storiesModal">
     <canvas id="storiesCanvas" width="1080" height="1920"></canvas>
     <div class="stories-actions">
+      <button class="stories-btn stories-btn-primary" id="shareStoriesBtn" onclick="shareStories()">Compartilhar no Instagram</button>
       <button class="stories-btn" id="downloadStoriesBtn" onclick="downloadStories()">Baixar imagem</button>
-      <a class="stories-btn stories-btn-primary" href="https://instagram.com" target="_blank" rel="noopener">Abrir Instagram</a>
       <button class="stories-btn stories-btn-outline" onclick="closeStories(event)">Fechar</button>
     </div>
-    <p class="stories-help">Baixe a imagem, depois abra o Instagram e poste nos Stories manualmente.</p>
+    <p class="stories-help" id="storiesHelp">No celular, o Instagram aparece como opção na folha de compartilhamento.</p>
   </div>
 </div>
 
@@ -239,6 +239,31 @@ function downloadStories() {
   link.download = 'tempovani-stories.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
+}
+
+function shareStories() {
+  var canvas = document.getElementById('storiesCanvas');
+  canvas.toBlob(function(blob) {
+    var file = new File([blob], 'tempovani-stories.png', { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({
+        files: [file],
+        title: 'Revista Tempovani',
+        text: 'Confira este artigo na Revista Tempovani'
+      }).catch(function() {});
+    } else {
+      // Fallback: download + open Instagram
+      downloadStories();
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1) {
+        window.location.href = 'instagram://';
+      } else if (ua.indexOf('android') > -1) {
+        window.location.href = 'intent://instagram.com#Intent;package=com.instagram.android;end';
+      } else {
+        window.open('https://instagram.com', '_blank');
+      }
+    }
+  });
 }
 
 
