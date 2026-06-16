@@ -479,6 +479,143 @@ main {
   font-size: 0.82rem;
 }
 
+/* Share */
+.share-section {
+  margin-bottom: 32px;
+}
+.share-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.share-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: #fff;
+}
+.share-btn svg {
+  flex-shrink: 0;
+}
+.share-btn.copied {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+}
+.share-stories {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+.share-stories:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+.share-fb:hover { color: #1877f2; border-color: #1877f2; }
+.share-x:hover { color: #000; border-color: #000; }
+.share-wa:hover { color: #25d366; border-color: #25d366; }
+
+/* Stories Modal */
+.stories-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 300;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.stories-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.stories-modal canvas {
+  width: auto;
+  height: 85vh;
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.stories-actions {
+  display: flex;
+  gap: 12px;
+}
+.stories-btn {
+  padding: 12px 32px;
+  border: none;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.stories-btn:hover {
+  background: var(--color-accent-hover);
+}
+.stories-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
+}
+.stories-btn-outline:hover {
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+.read-time {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.read-time::before {
+  content: " \00b7 ";
+  margin: 0 6px;
+}
+
+@media (max-width: 768px) {
+  .stories-modal canvas {
+    height: 70vh;
+  }
+  .share-buttons {
+    gap: 8px;
+  }
+  .share-btn {
+    padding: 8px 12px;
+    font-size: 0.72rem;
+  }
+}
+
 /* ============ ARCHIVE ============ */
 .archive-header {
   padding: 48px 0 24px;
