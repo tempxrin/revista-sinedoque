@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page.excerpt | strip_html | default: site.description }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="feed" type="application/atom+xml" href="{{ '/feed.xml' | relative_url }}">
   {% seo %}
@@ -26,16 +26,33 @@
 
   {% include footer.html %}
 
-  {% if page.layout == 'post' %}
   <script>
+    document.querySelector('.menu-toggle')?.addEventListener('click', function() {
+      document.querySelector('.header-nav').classList.toggle('open');
+    });
+
+    {% if page.layout == 'post' %}
     window.addEventListener('scroll', function() {
       var scrollTop = window.scrollY;
       var docHeight = document.documentElement.scrollHeight - window.innerHeight;
       var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       document.getElementById('readingProgress').style.width = progress + '%';
     });
+    {% endif %}
+
+    // Scroll reveal
+    var revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function(el) { observer.observe(el); });
+    }
   </script>
-  {% endif %}
 
 </body>
 </html>

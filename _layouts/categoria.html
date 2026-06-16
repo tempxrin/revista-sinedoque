@@ -1,18 +1,19 @@
 ---
 layout: default
-title: Todos os Artigos
-permalink: /artigos/
 ---
 
+{% assign cat_slug = page.category %}
+{% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat_slug" %}
 {% assign art_images = "basquiat-crown.svg|basquiat-face.svg|basquiat-skull.svg" | split: "|" %}
 
 <section class="archive-header">
-  <h1>Todos os Artigos</h1>
-  <p class="archive-count">{{ site.posts | size }} publicações</p>
+  <span class="section-tag">{{ page.title }}</span>
+  <h1>{{ page.title }}</h1>
+  <p class="archive-count">{{ cat_posts | size }} publicações</p>
 </section>
 
 <section class="archive-list">
-  {% for post in site.posts %}
+  {% for post in cat_posts %}
     {% assign img_idx = forloop.index0 | modulo: 3 %}
     <article class="archive-item">
       <div style="display:flex;gap:24px;align-items:start">
@@ -20,7 +21,7 @@ permalink: /artigos/
         <div>
           <div class="archive-meta">
             <time>{{ post.date | date: "%d/%m/%Y" }}</time>
-            <span class="section-tag">{{ post.categories | first | default: "artigo" }}</span>
+            <span class="section-tag">{{ page.title }}</span>
           </div>
           <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
           <p class="archive-author">{{ post.author }}</p>

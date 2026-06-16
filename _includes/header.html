@@ -6,14 +6,13 @@
     </a>
     <nav class="header-nav">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Início</a>
-      <a href="{{ '/artigos/' | relative_url }}"{% if page.url contains '/artigos/' %} class="active"{% endif %}>Artigos</a>
+      <a href="{{ '/categoria/ensaio/' | relative_url }}"{% if page.url contains '/ensaio/' %} class="active"{% endif %}>Ensaios</a>
+      <a href="{{ '/categoria/cronica/' | relative_url }}"{% if page.url contains '/cronica/' %} class="active"{% endif %}>Crônicas</a>
+      <a href="{{ '/categoria/politica/' | relative_url }}"{% if page.url contains '/politica/' %} class="active"{% endif %}>Política</a>
+      <a href="{{ '/categoria/cultura/' | relative_url }}"{% if page.url contains '/cultura/' %} class="active"{% endif %}>Cultura</a>
+      <a href="{{ '/categoria/ciencia/' | relative_url }}"{% if page.url contains '/ciencia/' %} class="active"{% endif %}>Ciência</a>
+      <a href="{{ '/artigos/' | relative_url }}"{% if page.url == '/artigos/' %} class="active"{% endif %}>Arquivo</a>
     </nav>
-    <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+    <button class="menu-toggle" aria-label="Menu">Menu</button>
   </div>
 </header>
-
-<script>
-  document.querySelector('.menu-toggle')?.addEventListener('click', function() {
-    document.querySelector('.header-nav').classList.toggle('open');
-  });
-</script>

@@ -4,56 +4,76 @@ title: Início
 ---
 
 {% assign art_images = "basquiat-crown.svg|basquiat-face.svg|basquiat-skull.svg" | split: "|" %}
+{% assign categories = "ensaio|cronica|cultura|politica|ciencia" | split: "|" %}
+{% assign cat_labels = "Ensaios|Crônicas|Cultura|Política|Ciência" | split: "|" %}
+{% assign alt_styles = "|category-section-alt||category-section-alt|" | split: "|" %}
 
-<section class="featured-post">
-  {% assign latest = site.posts | first %}
-  {% if latest %}
-    {% assign img_idx = 0 %}
-    <div class="featured-card">
-      <div class="featured-image">
-        <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="featured-img">
+<section class="hero">
+  <h1 class="hero-logo">
+    Revista Tempovani
+    <span class="hero-accent">Dono do próprio nariz</span>
+  </h1>
+  <p class="hero-tagline">Uma revista de ideias, escrita no tempo vão.</p>
+  <div class="hero-line"></div>
+</section>
+
+{% for cat in categories %}
+  {% assign idx = forloop.index0 %}
+  {% assign cat_slug = cat %}
+  {% assign cat_label = cat_labels[idx] %}
+  {% assign alt_class = alt_styles[idx] %}
+  {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat_slug" %}
+  {% assign post_count = cat_posts | size %}
+  {% if post_count > 0 %}
+    <section class="category-section{{ alt_class }}">
+      <div class="section-header">
+        <span class="section-title">{{ cat_label }}</span>
+        <a href="{{ '/categoria/' | append: cat_slug | append: '/' | relative_url }}" class="section-link">Ver todos →</a>
       </div>
-      <div class="featured-content">
-        <span class="section-tag">{{ latest.categories | first | default: "destaque" }}</span>
-        <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
-        <p class="excerpt">{{ latest.excerpt | strip_html | truncatewords: 30 }}</p>
-        <p class="meta">{{ latest.author }} &mdash; {{ latest.date | date: "%d %b %Y" }}</p>
+
+      {% assign first_post = cat_posts | first %}
+      {% assign img_idx = idx | modulo: 3 %}
+      <div class="article-row reveal">
+        <div class="article-row-image">
+          <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="">
+        </div>
+        <div class="article-row-content">
+          <span class="section-tag">{{ cat_label }}</span>
+          <h2><a href="{{ first_post.url | relative_url }}">{{ first_post.title }}</a></h2>
+          <p class="excerpt">{{ first_post.excerpt | strip_html | truncatewords: 25 }}</p>
+          <p class="meta">{{ first_post.author }} &mdash; {{ first_post.date | date: "%d %b %Y" }}</p>
+        </div>
       </div>
-    </div>
+
+      {% assign remaining = cat_posts | shift %}
+      {% assign rem_count = remaining | size %}
+      {% if rem_count > 0 %}
+        <div class="category-grid" style="margin-top:32px">
+          <div class="category-featured reveal">
+            {% assign second = remaining | first %}
+            {% assign img_idx2 = idx | plus: 1 | modulo: 3 %}
+            <img src="{{ '/assets/img/' | append: art_images[img_idx2] | relative_url }}" alt="">
+            <div class="category-featured-content">
+              <span class="section-tag">{{ cat_label }}</span>
+              <h3><a href="{{ second.url | relative_url }}">{{ second.title }}</a></h3>
+              <p class="meta">{{ second.author }} &mdash; {{ second.date | date: "%d %b %Y" }}</p>
+            </div>
+          </div>
+          <div class="category-list">
+            {% assign more = remaining | shift %}
+            {% for p in more limit:4 %}
+              <div class="category-list-item reveal">
+                {% assign img_idx3 = forloop.index0 | plus: idx | modulo: 3 %}
+                <img src="{{ '/assets/img/' | append: art_images[img_idx3] | relative_url }}" alt="">
+                <div>
+                  <h4><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h4>
+                  <p class="meta">{{ p.date | date: "%d %b %Y" }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </section>
   {% endif %}
-</section>
-
-<section class="home-grid">
-  {% for post in site.posts offset:1 limit:6 %}
-    {% assign img_idx = forloop.index0 | modulo: 3 %}
-    <article class="post-card">
-      <div class="card-image">
-        <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="card-img">
-      </div>
-      <div class="card-content">
-        <span class="section-tag">{{ post.categories | first | default: "artigo" }}</span>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="meta">{{ post.author }} &mdash; {{ post.date | date: "%d %b %Y" }}</p>
-      </div>
-    </article>
-  {% endfor %}
-</section>
-
-{% assign posts_count = site.posts | size %}
-{% if posts_count > 7 %}
-  <section class="secondary-grid">
-    {% for post in site.posts offset:7 %}
-      {% assign img_idx = forloop.index0 | modulo: 3 %}
-      <article class="post-card-small">
-        <div class="card-image">
-          <img src="{{ '/assets/img/' | append: art_images[img_idx] | relative_url }}" alt="" class="card-img-small">
-        </div>
-        <div class="card-content">
-          <span class="section-tag">{{ post.categories | first | default: "artigo" }}</span>
-          <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
-          <p class="meta">{{ post.author }}</p>
-        </div>
-      </article>
-    {% endfor %}
-  </section>
-{% endif %}
+{% endfor %}
