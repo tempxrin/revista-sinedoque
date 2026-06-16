@@ -71,7 +71,7 @@ function copyLink() {
   setTimeout(function() { btn.classList.remove('copied'); }, 2000);
 }
 
-function drawStoryCanvas(canvas, img, title, excerpt, readTime) {
+function drawStoryCanvas(canvas, img, title, author, excerpt, readTime) {
   var ctx = canvas.getContext('2d');
   var W = 1080, H = 1920;
 
@@ -111,6 +111,9 @@ function drawStoryCanvas(canvas, img, title, excerpt, readTime) {
   ctx.font = '28px "DM Sans", sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText(readTime + ' min de leitura', cardX + 48, yPos);
+  ctx.textAlign = 'right';
+  ctx.fillText('por ' + author, cardX + cardW - 48, yPos);
+  ctx.textAlign = 'left';
   yPos += 20;
 
   ctx.fillStyle = '#1a1a1a';
@@ -163,6 +166,7 @@ function shareStories() {
   btn.disabled = true;
 
   var title = {{ page.title | jsonify }};
+  var author = {{ page.author | jsonify }};
   var excerpt = {{ excerpt_text | jsonify }};
   var readTime = {{ read_time }};
   var img = new Image();
@@ -173,7 +177,7 @@ function shareStories() {
     var canvas = document.createElement('canvas');
     canvas.width = 1080;
     canvas.height = 1920;
-    drawStoryCanvas(canvas, img, title, excerpt, readTime);
+    drawStoryCanvas(canvas, img, title, author, excerpt, readTime);
 
     canvas.toBlob(function(blob) {
       btn.textContent = 'Stories';

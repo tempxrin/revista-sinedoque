@@ -1,6 +1,6 @@
 ---
 title: "Anderson Herzer e a queda para o alto"
-author: "Revista Sinédoque"
+author: "João Daniel Temporin"
 date: 2026-06-16
 categories: [cultura]
 image: "/assets/img/herzer-capa.jpg"
