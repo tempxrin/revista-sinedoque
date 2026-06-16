@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<article class="post-article">
+  <header class="post-header">
+    <span class="section-tag">{{ page.categories | first | default: "artigo" }}</span>
+    <h1>{{ page.title }}</h1>
+    <div class="post-meta">
+      <span class="post-author">{{ page.author }}</span>
+      <time>{{ page.date | date: "%-d de %B de %Y" }}</time>
+    </div>
+  </header>
+
+  <div class="post-image-hero">
+    <div class="hero-placeholder"></div>
+  </div>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <p class="post-footer-text"><a href="/artigos/">&#8592; Todos os artigos</a></p>
+  </footer>
+</article>
