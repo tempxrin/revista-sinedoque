@@ -27,41 +27,41 @@ title: Início
       </div>
 
       {% assign first_post = cat_posts | first %}
-      <div class="article-row reveal">
+      <a href="{{ first_post.url | relative_url }}" class="article-row reveal">
         <div class="article-row-image">
-          <a href="{{ first_post.url | relative_url }}"><img src="{{ first_post.image | relative_url }}" alt=""></a>
+          <img src="{{ first_post.image | relative_url }}" alt="">
         </div>
         <div class="article-row-content">
           <span class="section-tag">{{ cat_label }}</span>
-          <h2><a href="{{ first_post.url | relative_url }}">{{ first_post.title }}</a></h2>
+          <h2>{{ first_post.title }}</h2>
           <p class="excerpt">{{ first_post.excerpt | strip_html | truncatewords: 25 }}</p>
           <p class="meta">{{ first_post.author }} &mdash; {{ first_post.date | date: "%d %b %Y" }}</p>
         </div>
-      </div>
+      </a>
 
       {% assign remaining = cat_posts | shift %}
       {% assign rem_count = remaining | size %}
       {% if rem_count > 0 %}
         <div class="category-grid" style="margin-top:32px">
-          <div class="category-featured reveal">
-            {% assign second = remaining | first %}
-            <a href="{{ second.url | relative_url }}"><img src="{{ second.image | relative_url }}" alt=""></a>
+          {% assign second = remaining | first %}
+          <a href="{{ second.url | relative_url }}" class="category-featured reveal">
+            <img src="{{ second.image | relative_url }}" alt="">
             <div class="category-featured-content">
               <span class="section-tag">{{ cat_label }}</span>
-              <h3><a href="{{ second.url | relative_url }}">{{ second.title }}</a></h3>
+              <h3>{{ second.title }}</h3>
               <p class="meta">{{ second.author }} &mdash; {{ second.date | date: "%d %b %Y" }}</p>
             </div>
-          </div>
+          </a>
           <div class="category-list">
             {% assign more = remaining | shift %}
             {% for p in more limit:4 %}
-              <div class="category-list-item reveal">
-                <a href="{{ p.url | relative_url }}"><img src="{{ p.image | relative_url }}" alt=""></a>
+              <a href="{{ p.url | relative_url }}" class="category-list-item reveal">
+                <img src="{{ p.image | relative_url }}" alt="">
                 <div>
-                  <h4><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h4>
+                  <h4>{{ p.title }}</h4>
                   <p class="meta">{{ p.date | date: "%d %b %Y" }}</p>
                 </div>
-              </div>
+              </a>
             {% endfor %}
           </div>
         </div>

@@ -11,18 +11,18 @@ permalink: /artigos/
 
 <section class="archive-list">
   {% for post in site.posts %}
-    <article class="archive-item">
+    <a href="{{ post.url | relative_url }}" class="archive-item">
       <div style="display:flex;gap:24px;align-items:start">
-        <a href="{{ post.url | relative_url }}"><img src="{{ post.image | relative_url }}" alt="" style="width:140px;height:100px;object-fit:cover;flex-shrink:0"></a>
+        <img src="{{ post.image | relative_url }}" alt="" style="width:140px;height:100px;object-fit:cover;flex-shrink:0">
         <div>
           <div class="archive-meta">
             <time>{{ post.date | date: "%d/%m/%Y" }}</time>
             <span class="section-tag">{{ post.categories | first | default: "artigo" }}</span>
           </div>
-          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          <h2>{{ post.title }}</h2>
           <p class="archive-author">{{ post.author }}</p>
         </div>
       </div>
-    </article>
+    </a>
   {% endfor %}
 </section>
