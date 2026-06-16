@@ -14,6 +14,10 @@
 </head>
 <body>
 
+  {% if page.layout == 'post' %}
+    <div class="reading-progress" id="readingProgress"></div>
+  {% endif %}
+
   {% include header.html %}
 
   <main>
@@ -21,6 +25,17 @@
   </main>
 
   {% include footer.html %}
+
+  {% if page.layout == 'post' %}
+  <script>
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('readingProgress').style.width = progress + '%';
+    });
+  </script>
+  {% endif %}
 
 </body>
 </html>
