@@ -3,8 +3,12 @@ layout: default
 ---
 
 {% assign art_images = "basquiat-crown.svg|basquiat-face.svg|basquiat-skull.svg" | split: "|" %}
-{% assign img_idx = page.date | date: "%j" | modulo: 3 %}
-{% assign img_path = '/assets/img/' | append: art_images[img_idx] %}
+{% if page.image %}
+  {% assign img_path = page.image %}
+{% else %}
+  {% assign img_idx = page.date | date: "%j" | modulo: 3 %}
+  {% assign img_path = '/assets/img/' | append: art_images[img_idx] %}
+{% endif %}
 {% assign words = content | number_of_words %}
 {% assign read_time = words | divided_by: 200 | plus: 1 %}
 {% assign excerpt_text = content | strip_html | truncatewords: 30 %}
@@ -145,12 +149,12 @@ function drawStoryCanvas(canvas, img, title, excerpt, readTime) {
   ctx.fillStyle = '#bbbbbb';
   ctx.font = '24px "DM Sans", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('revistatempovani.com', W / 2, cardY + cardH - 48);
+    ctx.fillText('revistasinedoque.com.br', W / 2, cardY + cardH - 48);
 
   ctx.fillStyle = 'rgba(255,255,255,0.5)';
   ctx.font = '22px "DM Sans", sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('◆ Revista Tempovani', 48, 72);
+  ctx.fillText('◆ revista sinedoque', 48, 72);
 }
 
 function shareStories() {
@@ -174,12 +178,12 @@ function shareStories() {
     canvas.toBlob(function(blob) {
       btn.textContent = 'Stories';
       btn.disabled = false;
-      var file = new File([blob], 'tempovani-stories.png', { type: 'image/png' });
+      var file = new File([blob], 'sinedoque-stories.png', { type: 'image/png' });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: 'Revista Tempovani', text: title }).catch(function() {});
+        navigator.share({ files: [file], title: 'revista sinedoque', text: title }).catch(function() {});
       } else {
         var link = document.createElement('a');
-        link.download = 'tempovani-stories.png';
+        link.download = 'sinedoque-stories.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
         var ua = navigator.userAgent.toLowerCase();
