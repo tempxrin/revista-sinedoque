@@ -1,9 +1,11 @@
 <header class="site-header">
   <div class="header-inner">
+    <button class="menu-toggle" aria-label="Menu">&#9776;</button>
     <a href="{{ '/' | relative_url }}" class="logo">
       <span class="logo-icon">&#9670;</span>
       <span class="logo-text">Revista<br><strong>Tempovani</strong></span>
     </a>
+    <div class="header-spacer"></div>
     <nav class="header-nav">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Início</a>
       <a href="{{ '/categoria/ensaio/' | relative_url }}"{% if page.url contains '/ensaio/' %} class="active"{% endif %}>Ensaios</a>
@@ -13,6 +15,5 @@
       <a href="{{ '/categoria/ciencia/' | relative_url }}"{% if page.url contains '/ciencia/' %} class="active"{% endif %}>Ciência</a>
       <a href="{{ '/artigos/' | relative_url }}"{% if page.url == '/artigos/' %} class="active"{% endif %}>Arquivo</a>
     </nav>
-    <button class="menu-toggle" aria-label="Menu">Menu</button>
   </div>
 </header>
