@@ -1,6 +1,6 @@
 title: "revista sinedoque"
 description: Revista Sinédoque
-url: "https://revistasinedoque.com.br"
+url: "https://revista-tempovani.pages.dev"
 baseurl: ""
 permalink: /artigos/:title/
 markdown: kramdown
